@@ -16,6 +16,7 @@ import Account from "./views/account";
 import Failed from "./views/checkout/failed";
 import VoucherGift from "./views/voucher-gift/VoucherGift";
 import SignUpSuccess from "./views/checkout/signupsuccess/SignupSuccess";
+import Category from "./views/category";
 
 const RootRoutes = () => {
   return (
@@ -25,6 +26,8 @@ const RootRoutes = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/p/:slug/:id" component={Singleproduct} />
         <Route exact path="/shop/:slug" component={Shopdetails} />
+        <Route exact path="/shop/:slug/:id" component={Shopdetails} />
+        <Route exact path="/c/:slug/:id" component={Shopdetails } />
         <PrivateRoute path="/checkout" component={Checkout} />
         <Route path="/product/catalogsearch/result/:id" component={Productview} />
         <PrivateRoute path="/order/success" component={Complete} />

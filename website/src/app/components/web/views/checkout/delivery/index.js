@@ -1,71 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import { GetLocationDetails } from '../../../../services';
-import { NotificationManager } from 'react-notifications';
-import axios from "axios"
+import React, { useState, useEffect } from "react";
+import { GetLocationDetails } from "../../../../services";
+import { NotificationManager } from "react-notifications";
+import axios from "axios";
 
 const DeliveryDetails = (props) => {
   const [locationList, setLocationList] = useState([]);
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [district, setDistrict] = useState(1);
-  const [area, setArea] = useState('');
-  const [states, setStates] = useState('');
-  const [address, setAddress] = useState('');
-  const [listCity, setListCity]= useState([])
-  const [listDistrict, setListDistrict]= useState([])
-  const [listWard, setListWard]= useState([])
+  const [area, setArea] = useState("");
+  const [states, setStates] = useState("");
+  const [address, setAddress] = useState("");
+  const [listCity, setListCity] = useState([]);
+  const [listDistrict, setListDistrict] = useState([]);
+  const [listWard, setListWard] = useState([]);
 
-  const {city, setCity, setIsNextStep2 }= props
-  useEffect(()=> {
-    (async ()=> {
-        const result= await axios({
-          url: "https://provinces.open-api.vn/api/", 
-          method: "get"
-        })
-        setListCity(result.data)
-    })()
-  }, [])
-  useEffect(()=> {
-    (async ()=> {
-        const result= await axios({
-            url: "https://provinces.open-api.vn/api/?depth=2", 
-            method: "get"
-        })
-        setListDistrict(result.data?.filter(item=> item?.code == city))
-    })()
-  }, [city])
-  useEffect(()=> {
-    (async ()=> {
-        const result= await axios({
-            url: "https://provinces.open-api.vn/api/?depth=3", 
-            method: "get"
-        })
-        setListWard(result.data)
-    })()
-  }, [city, district])
-  
+  const { city, setCity, setIsNextStep2 } = props;
+  useEffect(() => {
+    (async () => {
+      const result = await axios({
+        url: "https://vapi.vnappmob.com/api/province/",
+        method: "get",
+      });
+      setListCity(result.data.results);
+    })();
+  }, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        const result = await axios({
+          url: "https://vapi.vnappmob.com/api/province/district/" + city,
+          method: "get",
+        });
+        console.log(result.data.results)
+        setListDistrict(result.data.results);
+      } catch (error) {
+        console.log(error)
+      }
+    })();
+  }, [city]);
+  useEffect(() => {
+    (async () => {
+      const result = await axios({
+        url: "https://vapi.vnappmob.com/api/province/ward/" + district,
+        method: "get",
+      });
+      setListWard(result.data.results);
+    })();
+  }, [city, district]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
-      case 'name':
+      case "name":
         setName(value);
         break;
-      case 'phone':
+      case "phone":
         setPhone(value);
         break;
-      case 'district':
+      case "district":
         setDistrict(value);
         break;
-      case 'city':
+      case "city":
         setCity(value);
         break;
-      case 'area':
+      case "area":
         setArea(value);
         break;
-      case 'states':
+      case "states":
         setStates(value);
         break;
-      case 'address':
+      case "address":
         setAddress(value);
         break;
       default:
@@ -74,7 +79,7 @@ const DeliveryDetails = (props) => {
   };
 
   const handleSubmit = (event) => {
-    setIsNextStep2(true)
+    setIsNextStep2(true);
     const delivery = {
       name: name,
       phone: phone,
@@ -83,8 +88,7 @@ const DeliveryDetails = (props) => {
       area: area,
       states: states,
       address: address,
-      email: states
-
+      email: states,
     };
     props.onSelectDeliveryAddress(delivery);
   };
@@ -95,7 +99,7 @@ const DeliveryDetails = (props) => {
         const location = await GetLocationDetails.getLocationListDetails();
         setLocationList(location.data);
       } catch (error) {
-        NotificationManager.error('Data is empty', 'Data');
+        NotificationManager.error("Data is empty", "Data");
       }
     };
 
@@ -168,9 +172,11 @@ const DeliveryDetails = (props) => {
                 value={district}
                 onChange={handleChange}
               >
-                {
-                  listDistrict?.[0]?.districts?.map((item, key)=> <option key={key} value={item.code}>{item?.name}</option>)
-                }
+                {listDistrict?.map((item, key) => (
+                  <option key={key} value={item.district_id}>
+                    {item?.district_name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -188,9 +194,11 @@ const DeliveryDetails = (props) => {
                 value={city}
                 onChange={handleChange}
               >
-                {
-                    listCity.map((item, key)=> <option key={key} value={item.code}>{item?.name}</option>)
-                }
+                {listCity.map((item, key) => (
+                  <option key={key} value={item.province_id}>
+                    {item?.province_name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -206,9 +214,12 @@ const DeliveryDetails = (props) => {
                 value={area}
                 onChange={handleChange}
               >
-                {
-                    (listWard?.filter(item=> item?.code== city && item?.districts?.filter(item2=> item2?.code=== district))?.[0]?.districts?.filter(item=> item?.code== district)?.[0]?.wards?.map((item, key)=> <option key={key} value={item?.code}>{item?.name}</option>))
-                }
+                {listWard
+                  ?.map((item, key) => (
+                    <option key={key} value={item?.ward_id}>
+                      {item?.ward_name}
+                    </option>
+                  ))}
               </select>
             </div>
           </div>
@@ -238,9 +249,8 @@ const DeliveryDetails = (props) => {
           aria-expanded="false"
           aria-controls="collapseThree"
           className="btn btn-secondary mb-2 btn-lg"
-          onClick={()=> {
+          onClick={() => {
             handleSubmit();
-            
           }}
         >
           Next

@@ -9,6 +9,7 @@ import scheduler from './scheduler';
 import path from 'path';
 import cors from 'cors';
 import checkExpiredVouchers from './cronjob';
+import { Sequelize } from 'sequelize';
 global.appRoot = path.resolve(__dirname);
 
 const PORT = config.app.port;
@@ -42,6 +43,7 @@ app.use((error, req, res, next) => {
 
 // kue.init();
 /* Database Connection */
+// await Sequelize..sync({ force: true });
 db.sequelize.authenticate().then(function () {
 	console.log('Nice! Database looks fine');
 	scheduler.init();

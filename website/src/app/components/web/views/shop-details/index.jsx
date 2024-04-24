@@ -10,8 +10,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { Button } from "@material-ui/core/";
 import numberWithCommas from "../../../../../util/number_thousand_separator";
 import _ from "lodash"
+import { useParams } from "react-router-dom";
 
 const Shopdetails = () => {
+  const {id }= useParams()
   const [list, setList] = useState([]);
   const [limit, setLimit] = useState(12);
   const [isloaded, setIsLoaded] = useState(false);
@@ -34,7 +36,7 @@ const Shopdetails = () => {
       try {
         let p = await GetProductDetails.getAllProductList(lastSegment);
         if (p) {
-          setList(p.data.products);
+          setList(p.data.products.filter(item=> item.categoryId == id));
           setIsLoaded(true);
         }
       } catch (e) {
@@ -42,7 +44,7 @@ const Shopdetails = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   const onLoadMore = () => {
     setLimit((prevLimit) => prevLimit + 6);

@@ -123,7 +123,7 @@ export default {
     async getCategoryListHeader(req, res, next) {
         try {
             db.category.findAll({
-                limit: 3
+                limit: 4
             })
             .then(list=> res.status(200).json({'success': true, data: list}))
             .catch(e=> next(e))
