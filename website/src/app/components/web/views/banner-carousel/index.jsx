@@ -20,7 +20,7 @@ export default class Bannerslider extends Component {
         return (
             <div>
                 {/* <Category /> */}
-                <Slider {...settings}>
+                {/* <Slider {...settings}>
                     <div className="owl-item">
                         <img className="owl-item-img-" style={{width: "100%", aspectRatio: 5 / 2}} src="https://routine.vn/media/banner/tmp/images/LOVE_DESKTOP.jpg" alt="supermarket" />
                     </div>
@@ -30,7 +30,7 @@ export default class Bannerslider extends Component {
                     <div className="owl-item">
                         <img className="owl-item-img-" style={{width: "100%", aspectRatio: 5 / 2}} src="https://routine.vn/media/banner/tmp/images/banner-cfl-01.jpg" alt="supermarket" />
                     </div>
-                </Slider>
+                </Slider> */}
             </div>
         )
     }

@@ -82,8 +82,8 @@ const Login = () => {
     if (formValid({ formErrors, email, password })) {
       let user = await GetUserLogin.getUserLogin(data);
       if (user) {
-        NotificationManager.success("Success", "Login");
-        await GetUserLogin.authenticate(user.token, email);
+        // NotificationManager.success("Success", "Login");
+        // await GetUserLogin.authenticate(user.token, email);
         if (rememberMe) {
           localStorage.setItem("rememberedEmail", email);
           localStorage.setItem("rememberedPassword", password);

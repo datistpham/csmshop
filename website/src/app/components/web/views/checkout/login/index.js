@@ -61,10 +61,10 @@ export default class Login extends Component {
     if (formValid(this.state)) {
       let user = await GetUserLogin.getUserLogin(data);
       if (user) {
-        NotificationManager.success('Success', 'Login');
-        await GetUserLogin.authenticateByCart(user.token, email);
+        // NotificationManager.success('Success', 'Login');
+        // await GetUserLogin.authenticateByCart(user.token, email);
       } else {
-        NotificationManager.error('Please check your email & password', 'Input Error');
+        // NotificationManager.error('Please check your email & password', 'Input Error');
       }
     } else {
       NotificationManager.error('Please check your Login', 'Input Error');

@@ -4,9 +4,9 @@ import {Link } from "react-router-dom"
 const NewBannerSlider = () => {
   return (
     <div className="home-banner" style={{ paddingTop: "35px !important" }}>
-      <Link to="/promotion/sale-off"></Link>
+      <Link to="#"></Link>
       <div className="home-banner-item">
-        <Link to="/promotion/sale-off">
+        <Link to="#">
           <img
             src="https://routine.vn/pub/media/wysiwyg/ECOM_600x950_2.jpg"
             alt="Giảm 50% cho sản phẩm thứ 2"
@@ -15,14 +15,14 @@ const NewBannerSlider = () => {
         <Link
           className="btn"
           style={{ textTransform: "uppercase" }}
-          to="/promotion/sale-off.html"
+          to="#"
         >
           Xem ngay
         </Link>
       </div>
-      <Link to="/promotion/ao-khoac-399k.html"></Link>
+      <Link to="#"></Link>
       <div className="home-banner-item">
-        <Link to="/promotion/ao-khoac-399k.html">
+        <Link to="#">
           <img
             src="https://routine.vn/pub/media/wysiwyg/Untitled-2-01.jpg"
             alt="Áo khoác giá tốt 399k/áo khi mua từ 2 áo"
@@ -36,9 +36,9 @@ const NewBannerSlider = () => {
           Xem ngay
         </Link>
       </div>
-      <Link to="/promotion/mua-1-tang-1.html"></Link>
+      <Link to="#"></Link>
       <div className="home-banner-item">
-        <Link to="/promotion/mua-1-tang-1">
+        <Link to="#">
           <img
             src="https://routine.vn/pub/media/wysiwyg/ECOM_600x950_copy_2.jpg"
             alt="Mua 1 tặng 1"
@@ -47,7 +47,7 @@ const NewBannerSlider = () => {
         <Link
           className="btn"
           style={{ textTransform: "uppercase" }}
-          to="/promotion/mua-1-tang-1"
+          to="#"
         >
           Xem ngay
         </Link>
