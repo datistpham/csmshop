@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt-nodejs';
 import speakeasy from 'speakeasy';
 import { validateEmail } from './../../../functions'
 import { Sequelize } from 'sequelize';
+import md5 from "md5"
 
 var JWTSign = function (user, date) {
     return JWT.sign({
@@ -86,6 +87,7 @@ export default {
     async login(req, res, next) {
         const {email, password }= req.body
         // var date = new Date();
+        const passwordHash= md5(password)
         const findUser= await db.customer.findOne({where: {email}})
         console.log("email", email)
         console.log("findUser", findUser)

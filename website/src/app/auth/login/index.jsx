@@ -81,9 +81,9 @@ const Login = () => {
     let data = { email: email, password: password };
     if (formValid({ formErrors, email, password })) {
       let user = await GetUserLogin.getUserLogin(data);
-      if (user) {
+      if (user.success=== true) {
         NotificationManager.success("Success", "Login");
-        await GetUserLogin.authenticate(user.token, email);
+        // await GetUserLogin.authenticate(user.token, email);
         await GetUserLogin.authenticateByCart(user.token, email);
 
         if (rememberMe) {
