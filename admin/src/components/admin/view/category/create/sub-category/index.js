@@ -51,6 +51,8 @@ export default class SubCategory extends Component {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      if(success== null) {
+      }
       if (success) {
         let list = await GetCategoryDetails.createSubCategoryList(data);
         if (list) {
@@ -67,6 +69,8 @@ export default class SubCategory extends Component {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      if(success== null) {
+      }
       if (success) {
         let value = await GetCategoryDetails.getSubDeleteById(id);
         if (value) {

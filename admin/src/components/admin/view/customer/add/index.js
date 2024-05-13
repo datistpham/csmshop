@@ -46,6 +46,9 @@ const View = () => {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      if(success== null) {
+        setLoading(false);
+      }
       if (success) {
         let value = await GetCustomerDetails.getCustomerDeleteById(id);
         if (value) {

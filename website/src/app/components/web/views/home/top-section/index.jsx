@@ -80,15 +80,7 @@ const Topsavers = ({ addToCart }) => {
             <span>For You</span>
             <h5 className="heading-design-h5">
               Sale
-              {/* <span className="badge badge-primary">20% OFF</span> */}
-              <Link
-                to={{
-                  pathname: `/shop/${productlist?.slug}`,
-                  state: list,
-                }}
-              >
-                <span className="float-right text-secondary">View All</span>
-              </Link>
+              {/* <span className="badge badge-primary">20% OFF</span> */}{console.log(productlist)}
             </h5>
           </div>
           <Slider {...settings}>

@@ -25,11 +25,12 @@ const RootRoutes = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/p/:slug/:id" component={Singleproduct} />
-        <Route exact path="/shop/:slug" component={Shopdetails} />
+        <Route exact path="/shop/:id" component={Shopdetails} />
         <Route exact path="/shop/:slug/:id" component={Shopdetails} />
         <Route exact path="/c/:slug/:id" component={Shopdetails } />
         <PrivateRoute path="/checkout" component={Checkout} />
         <Route path="/product/catalogsearch/result/:id" component={Productview} />
+        <Route path="/product/" component={Productview} />
         <PrivateRoute path="/order/success" component={Complete} />
         <PrivateRoute path="/order/failed" component={Failed} />
         <PrivateRoute path="/account" component={Account} />

@@ -103,6 +103,8 @@ const List = () => {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      if(success== null) {
+      }
       if (success) {
         let value = await GetProductDetails.getDeleteProduct(id);
         if (value) {

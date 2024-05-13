@@ -1,54 +1,51 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 import AutoSelect from "../../autoselect";
 
 const Arrays = (data, fieldName, fieldValue) => {
-    let arrayItem = [];
-    if (data && Array.isArray(data)) {
-        data.map((item, key) => {
-            arrayItem.push({ label: item[fieldName], value: item[fieldValue] });
-            return null;
-        });
-    }
-    return arrayItem;
+  let arrayItem = [];
+  if (data && Array.isArray(data)) {
+    data.forEach((item, key) => {
+      arrayItem.push({ label: item[fieldName], value: item[fieldValue] });
+    });
+  }
+  return arrayItem;
 };
 
-export default class SubCategorylist extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-             supplierList: this.props.state, selectedType: ''
-        }
+const SubCategorylist = (props) => {
+  const [selectedType, setSelectedType] = useState("");
+  const [supplierList, setSupplierList] = useState(props.state);
+
+  useEffect(()=> {
+    setSelectedType("")
+  }, [props.change])
+
+  const handleSelectChange = (name, selected) => {
+    if (name === "supplier_id") {
+      setSupplierList({
+        ...supplierList,
+        [name]: selected.value,
+      });
+      setSelectedType(selected);
+      props.onSelectSubCategory(selected.value);
     }
-    handleSelectChange = (name, selected) => {
-        if (name === "supplier_id") {
-            this.setState({
-                supplierlist: {
-                    ...this.state.supplierlist,
-                    [name]: selected.value,
-                },
-                selectedType: selected,
-            });
-            this.props.onSelectSubCategory(selected.value)
+  };
 
-            this.setState({ changed: true });
-        }
-    };
+  useEffect(() => {
+    setSupplierList(props.state);
+  }, [props.state]);
 
-    render() {
-        const { selectedType } = this.state;
-        return (
-            <div>
-                <AutoSelect
-                    className="basic-single"
-                    value={selectedType}
-                    onChange={this.handleSelectChange}
-                    isSearchable={true}
-                    name="supplier_id"
-                    options={Arrays(this.props.state, "sub_name", "id")}
-                />
-            </div>
+  return (
+    <div>
+      <AutoSelect
+        className="basic-single"
+        value={selectedType}
+        onChange={handleSelectChange}
+        isSearchable={true}
+        name="supplier_id"
+        options={Arrays(props.state, "sub_name", "id")}
+      />
+    </div>
+  );
+};
 
-
-        )
-    }
-}
+export default SubCategorylist;

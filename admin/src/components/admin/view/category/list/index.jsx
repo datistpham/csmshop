@@ -39,6 +39,8 @@ function List(props) {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      if(success== null) {
+      }
       if (success) {
         const value = await GetCategoryDetails.getChildDeleteById(id);
         if (value) {

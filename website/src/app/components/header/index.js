@@ -161,6 +161,7 @@ const Navigation = ({ history }) => {
                     ) : (
                       <div className="dropdown">
                         <button
+                          style={{boxShadow: "none"}}
                           className="btn btn-account dropdown-toggle d-flex align-items-center gap-10"
                           type="button"
                           id="dropdownMenuButton"

@@ -49,42 +49,11 @@ export default class Newproduct extends Component {
       previewImage: [],
       typeUnit: 0,
       size: [],
-      newAddImage: []
+      newAddImage: [],
+      change: false
     };
     this.updateSize= this.updateSize.bind(this)
   }
-  // componentDidMount() {
-  //   if(["short", "Short"].includes(this.state.getsublist[0].name)== true) {
-  //     this.setState({typeUnit: 1})
-  //   }  
-  //   else if(["shirt", "Shirt"].includes(this.state.getsublist[0].name) === true) {
-  //     this.setState({typeUnit: 2})
-  //   } 
-  //   else if(["short", "Short"].includes(this.state.getsublist[0].name) ===
-  //   false ||
-  //   ["shirt", "Shirt"].includes(this.state.getsublist[0].name) ===
-  //     false) {
-  //       this.setState({typeUnit: 3})
-  //     }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.getsublist[0].name != this.state.getsublist[0].name) {
-  //     if(["short", "Short"].includes(this.state.getsublist[0].name)== true) {
-  //       this.setState({typeUnit: 1})
-  //     }  
-  //     else if(["shirt", "Shirt"].includes(this.state.getsublist[0].name) === true) {
-  //       this.setState({typeUnit: 2})
-  //     } 
-  //     else if(["short", "Short"].includes(this.state.getsublist[0].name) ===
-  //     false ||
-  //     ["shirt", "Shirt"].includes(this.state.getsublist[0].name) ===
-  //       false) {
-  //         this.setState({typeUnit: 3})
-  //       }
-  //   }
-  // }
-
   handleBack() {
     this.props.history.goBack();
   }
@@ -123,6 +92,9 @@ export default class Newproduct extends Component {
   handleChildCategory = async (value) => {
     this.setState({ selectedChildCategory: value });
   };
+  handleChange= async ()=> {
+    this.setState({change: !this.state.change})
+  }
   caculationTable = () => {
     let price = this.state.price;
     let qty = this.state.qty;
@@ -150,6 +122,9 @@ export default class Newproduct extends Component {
   }
 
   handleSubmit = (event, listImage) => {
+    if(name.length <= 0 || brand.length <= 0 || price.toString().length <= 0) {
+      return swal("Thông báo", "Bạn phải nhập đầy đủ các trường", "error")
+    }
     event.preventDefault();
     this.setState({ isLoaded: true });
     const {
@@ -331,7 +306,7 @@ export default class Newproduct extends Component {
                 <div className="news-content-right pd-20">
                   <div className="form-group">
                     <label className="form-label">Category*</label>
-                    <MainCategorylist onSelectCategory={this.handleCategory} />
+                    <MainCategorylist onSelectCategory={this.handleCategory} handleChange={this.handleChange} />
                   </div>
                 </div>
               </div>
@@ -346,6 +321,8 @@ export default class Newproduct extends Component {
                     <SubCategorylist
                       state={getList}
                       onSelectSubCategory={this.handleSubCategory}
+                      handleChange={this.handleChange}
+                      change={this.state.change}
                     />
                   </div>
                 </div>
@@ -407,45 +384,6 @@ export default class Newproduct extends Component {
                     <div className="col-lg-2 col-md-2">
                       <div className="form-group">
                         <label className="form-label">Size*</label>
-                        {/* {this.state.typeUnit== 1 && (
-                            <select
-                              value={this.state.unit}
-                              className="form-control"
-                              placeholder="size"
-                              onChange={(e) => this.handleChange(e)}
-                              name="unit"
-                            >
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                            </select>
-                          )}
-                        {this.state.typeUnit== 2 && (
-                          <select
-                            value={this.state.unit}
-                            className="form-control"
-                            placeholder="size"
-                            onChange={(e) => this.handleChange(e)}
-                            name="unit"
-                          >
-                            <option value="X">X</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                            <option value="XXL">XXL</option>
-                            <option value="3XL">3XL</option>
-                          </select>
-                        )}
-                        {this.state.typeUnit== 3 && (
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="size"
-                              name="unit"
-                              value={this.state.unit}
-                              onChange={(e) => this.handleChange(e)}
-                            />
-                          )} */}
                             <input
                               readOnly
                               type="size"

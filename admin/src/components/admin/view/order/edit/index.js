@@ -268,6 +268,7 @@ const Edit = (props) => {
                             <input
                               className="custom-select"
                               type="date"
+                              min={new Date().toISOString().split('T')[0]}
                               name="deliverydate"
                               value={deliveryDate}
                               onChange={handleChange}

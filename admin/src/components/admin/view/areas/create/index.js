@@ -61,6 +61,8 @@ export default class Create extends Component {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      if(success== null) {
+      }
       if (success) {
         let list = await GetLocationDetails.createAreaList(data);
         if (list) {

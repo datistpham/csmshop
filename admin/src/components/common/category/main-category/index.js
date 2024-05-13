@@ -37,6 +37,7 @@ export default class MainCategorylist extends Component {
                 selectCategory: selected,
             });
             this.props.onSelectCategory(selected.value)
+            this.props.handleChange(prev=> !prev)
             this.setState({ changed: true });
         }
     };

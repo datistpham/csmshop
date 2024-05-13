@@ -154,6 +154,10 @@ const Edit = (props) => {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      console.log(success)
+      if(success== null) {
+        setLoading(false);
+      }
       if (success) {
         const imgList= await uploadImages(newAddImage)
         formData.append("newaddimage", JSON.stringify(imgList))

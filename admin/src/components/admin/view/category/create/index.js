@@ -49,6 +49,8 @@ const MainCategory = (props) => {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      if(success== null) {
+      }
       if (success) {
         let list = await GetCategoryDetails.createCategoryList(data);
         if (list) {
@@ -67,6 +69,9 @@ const MainCategory = (props) => {
       buttons: true,
       dangerMode: true,
     }).then(async (success) => {
+      if(success== null) {
+        
+      }
       if (success) {
         let value = await GetCategoryDetails.getChildDeleteById(id);
         if (value) {

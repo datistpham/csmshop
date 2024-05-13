@@ -88,8 +88,7 @@ export default {
         const {email, password }= req.body
         // var date = new Date();
         const passwordHash= md5(password)
-        const findUser= await db.customer.findOne({where: {email}})
-        console.log("email", email)
+        const findUser= await db.customer.findOne({where: {email, password: passwordHash}})
         console.log("findUser", findUser)
         if(findUser) {
             const token= JWT.sign({uid: findUser.dataValues.id, id: findUser.dataValues.id}, process.env.JWT_SECRET)
